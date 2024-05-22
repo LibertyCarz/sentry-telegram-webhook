@@ -14,6 +14,7 @@ env:
   TELEGRAM_TOPIC_ID: ${{ vars.TELEGRAM_TOPIC_ID }}
   SENTRY_INTEGRATION_TOKEN: ${{ secrets.SENTRY_INTEGRATION_TOKEN }}
   SENTRY_ORGANIZATION_SLUG: ${{ vars.SENTRY_ORGANIZATION_SLUG }}
+  SENTRY_PROJECT_SLUG_ALLOW_LIST: ${{ vars.SENTRY_ORGANIZATION_SLUG }}
 
 jobs:
   build:
@@ -31,5 +32,6 @@ jobs:
           echo "TELEGRAM_TOPIC_ID=${{ env.TELEGRAM_TOPIC_ID }}" >> .env
           echo "SENTRY_INTEGRATION_TOKEN=${{ env.SENTRY_INTEGRATION_TOKEN }}" >> .env
           echo "SENTRY_ORGANIZATION_SLUG=${{ env.SENTRY_ORGANIZATION_SLUG }}" >> .env
+          echo "SENTRY_PROJECT_SLUG_ALLOW_LIST=${{ env.SENTRY_PROJECT_SLUG_ALLOW_LIST }}" >> .env
       - run: docker compose -f docker-compose-prod.yml down --rmi local
       - run: docker compose -f docker-compose-prod.yml up -d
